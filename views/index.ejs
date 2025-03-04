@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Movie Recommendation</title>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h1>🎬 Movie Recommendation</h1>
+            <h4>Based on ratings from the Internet</h4>
+
+            <form action="/get-movies" method="post">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="movie" placeholder="Search Movie...">
+                <button type="submit">Search</button>
+            </form>
+
+            <% if (locals.content) { %>
+                <div class="movie-container">
+                    <div class="move-info">
+                   
+                        <img src="<%= content.Poster %>" alt="Movie Poster">
+                    
+                        <div class="info">
+                            <h2><%= content.Title %> (<%= content.Year %>)</h2>
+                            <p><strong>Genre:</strong> <%= content.Genre %></p>
+                            <p><strong>Director: </strong> <%= content.Director %></p>
+                            <p><strong>Actors:</strong> <%= content.Actors %></p>
+                            <p><strong>Runtime: </strong> <%= content.Runtime %></p>
+                            <p><strong>Awards: </strong> <%= content.Awards %></p>
+                            <p><strong>Box Office:</strong> <%= content.BoxOffice %></p>
+                        </div>    
+                    </div>
+                    
+                    <p><strong>Plot:</strong> <%= content.Plot %></p>
+                    
+                    <ul>
+                        <li><strong>IMDB Rating:</strong> <%= content.Ratings[0].Value %></li>
+                        <li><strong>Rotten Tomatoes:</strong> <%= content.Ratings[1].Value %></li>
+                        <li><strong>Metacritic:</strong> <%= content.Ratings[2].Value %></li>
+                    </ul>
+                    
+                    
+                    <h2>Should You Watch It?</h2>
+                    <div class="recommendation-box <%= recommendation.class %>">
+                        <h3><%= recommendation.message %></h3>
+                        <p><%= recommendation.details %></p>
+                    </div>
+                </div>
+            <% } %>
+
+            <% if (locals.error) { %>
+                <p class="error"><%= error %></p>
+            <% } %>
+
+        </div>
+    </div>
+        
+
+    <footer>© All Rights Reserved | Yash Laddu</footer>
+    
+
+</body>
+</html>
